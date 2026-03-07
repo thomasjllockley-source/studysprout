@@ -1,27 +1,55 @@
 # StudySprout
 
-A learning platform built with Node.js.
+A modern learning platform built with Express (Node.js) backend and Vite React frontend.
 
-## Project Status
+## Project Structure
 
-- **Framework**: Node.js (JavaScript)
-- **Workflow**: Start application → `node index.js` on port 5000
-- **Status**: Running and accessible
+```
+studysprout/
+├── server/                 # Express backend (port 3001)
+│   ├── package.json
+│   └── index.js
+├── client/                 # Vite React frontend (port 5173)
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── index.html
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx
+│       ├── App.css
+│       └── index.css
+├── package.json            # Root package with concurrently script
+└── replit.md
+```
 
-## Structure
+## Setup & Running
 
-- `index.js` - Main application entry point (simple HTTP server)
-- `package.json` - Project dependencies
-- `.replit` - Replit configuration
+The application runs via the "Start application" workflow with:
 
-## Getting Started
+```bash
+npm run install:all && npm run dev
+```
 
-The application runs automatically via the "Start application" workflow.
+This will:
+1. Install dependencies in root, server, and client directories
+2. Start both servers concurrently:
+   - **Backend**: Express API on `http://localhost:3001`
+   - **Frontend**: Vite React on `http://localhost:5173`
 
-Access the app at: http://localhost:5000
+## Tech Stack
 
-## Notes
+- **Backend**: Express.js (Node.js)
+- **Frontend**: React 18 + Vite
+- **Communication**: Axios with proxy configuration
+- **Styling**: CSS
 
-- The project was initialized from a zip archive
-- Currently running a basic HTTP server display
-- Ready for further development
+## API Endpoints
+
+- `GET /api/health` - Health check
+- `GET /api/courses` - Get available courses
+
+## Development
+
+- Frontend runs on port 5173 with hot module replacement
+- Backend runs on port 3001 with API endpoints
+- Frontend proxies `/api/*` requests to backend at port 3001
