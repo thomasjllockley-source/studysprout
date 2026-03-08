@@ -9,16 +9,11 @@ import wardrobeRoutes from './routes/wardrobe.js';
 import calendarRoutes from './routes/calendar.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: 'StudySprout API running' });
-});
 
 app.use('/api/user', userRoutes);
 app.use('/api/pets', petRoutes);
@@ -29,6 +24,4 @@ app.use('/api/calendar', calendarRoutes);
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../client/dist/index.html')));
 
-app.listen(PORT, () => {
-  console.log(`StudySprout API running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`StudySprout running on port ${PORT}`));
