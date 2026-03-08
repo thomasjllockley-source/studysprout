@@ -1,10 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import userRoutes from './routes/user.js';
 import petRoutes from './routes/pets.js';
 import sessionRoutes from './routes/sessions.js';
 import wardrobeRoutes from './routes/wardrobe.js';
 import calendarRoutes from './routes/calendar.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const PORT = 3001;
@@ -21,6 +25,9 @@ app.use('/api/pets', petRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/wardrobe', wardrobeRoutes);
 app.use('/api/calendar', calendarRoutes);
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../client/dist/index.html')));
 
 app.listen(PORT, () => {
   console.log(`StudySprout API running on http://localhost:${PORT}`);
