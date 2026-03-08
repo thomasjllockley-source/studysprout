@@ -22,6 +22,6 @@ app.use('/api/wardrobe', wardrobeRoutes);
 app.use('/api/calendar', calendarRoutes);
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
-app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../client/dist/index.html')));
+app.get('/{*path}', (req, res) => res.sendFile(path.join(__dirname, '../client/dist/index.html')));
 
 app.listen(PORT, () => console.log(`StudySprout running on port ${PORT}`));
